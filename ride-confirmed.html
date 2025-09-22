@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MR CUBAN Ride Confirmed</title>
+<style>
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#fff8f0;color:#333;padding:20px;}
+h1{color:#ff7a00;text-align:center;}
+h3{ text-align: center;}
+.details{max-width:500px;margin:0 auto;padding:20px;border:2px solid #ff7a00;border-radius:15px;background:#fff4e6;}
+.details div{margin:10px 0;font-size:18px;}
+.button-box{text-align:center;margin-top:20px;}
+.button-box button{padding:12px 20px;background:#ff7a00;color:#fff;border:none;border-radius:12px;font-size:16px;margin:5px;cursor:pointer;}
+.button-box a{text-decoration:none;color:#fff;}
+</style>
+</head>
+<body>
+<h1>✅ Ride Confirming...</h1>
+<h3>🥳 Apki ride details 1 ghante me apke whatsapp me send ki jaengi<br> Kuch puchne ke liye kabhi bhi call kre...</h3>
+
+<div class="details" id="rideDetails"></div>
+<div class="button-box">
+    <button onclick="window.open('https://drive.google.com/file/d/17FMjkXYGBzUCzXtl4TWYvV-whaHMQwD0/view?usp=drivesdk','_blank')">Download App</button>
+    <button onclick="window.location='tel:7522020838'">📞 Call Support</button>
+</div>
+
+<script>
+// Get ride data from URL
+const params = new URLSearchParams(window.location.search);
+const rideData = JSON.parse(decodeURIComponent(params.get('data')));
+const detailsDiv = document.getElementById('rideDetails');
+
+detailsDiv.innerHTML=`
+<div><b>Name:</b> ${rideData.name}</div>
+<div><b>Mobile:</b> ${rideData.mobile}</div>
+<div><b>Pickup:</b> ${rideData.pickup}</div>
+<div><b>Drop:</b> ${rideData.drop}</div>
+<div><b>Trip Type:</b> ${rideData.tripType}</div>
+<div><b>Vehicle:</b> ${rideData.vehicle}</div>
+<div><b>Price:</b> ₹${rideData.price}</div>
+<div><b>Pickup Time:</b> ${rideData.time}</div>
+`;
+</script>
+</body>
+</html>

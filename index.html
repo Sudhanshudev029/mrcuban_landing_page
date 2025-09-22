@@ -1,397 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- basic -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- mobile metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-  <!-- site metas -->
-  <title>Easier, Quicker, and Cheaper</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <!-- bootstrap css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <!-- style css -->
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <!-- Responsive-->
-  <link rel="stylesheet" href="css/responsive.css">
-  <!-- fevicon -->
-  <link rel="icon" href="images/fevicon.png" type="image/gif" />
-  <!-- Scrollbar Custom CSS -->
-  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-  <!-- Tweaks for older IEs-->
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-  <!-- owl stylesheets -->
-  <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-    media="screen">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MR CUBAN Booking</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:linear-gradient(135deg,#fffaf0,#ffe5b4);display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.container{background:#fff;border-radius:20px;padding:30px 25px;width:100%;max-width:450px;box-shadow:0 10px 25px rgba(0,0,0,0.1);text-align:center;}
+h1{color:#ff7a00;font-size:28px;margin-bottom:25px;font-weight:700;}
+label{font-weight:600;color:#333;display:block;margin-bottom:8px;margin-top:15px;text-align:left;}
+select,input{width:100%;padding:12px 15px;border-radius:12px;border:1px solid #ddd;font-size:16px;transition:border 0.3s;}
+select:focus,input:focus{border-color:#ff7a00;outline:none;}
+button{width:100%;padding:14px;border:none;border-radius:12px;background:#ff7a00;color:#fff;font-size:18px;font-weight:600;margin-top:25px;cursor:pointer;transition:background 0.3s, transform 0.2s;}
+button:hover{background:#ff9500;transform:translateY(-2px);}
+.toggle-container{display:flex;justify-content:center;align-items:center;margin-bottom:20px;}
+.toggle-label{margin-right:10px;font-weight:600;color:#333;}
+.switch{position:relative;display:inline-block;width:60px;height:30px;}
+.switch input{opacity:0;width:0;height:0;}
+.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#ccc;border-radius:34px;transition:0.4s;}
+.slider:before{position:absolute;content:"";height:22px;width:22px;left:4px;bottom:4px;background-color:white;border-radius:50%;transition:0.4s;}
+input:checked+.slider{background-color:#ff7a00;}
+input:checked+.slider:before{transform:translateX(30px);}
+.popup{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:1000;}
+.popup-content{background:#fff;border-radius:18px;width:90%;max-width:400px;padding:25px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.15);}
+.popup h2{color:#ff7a00;margin-bottom:20px;}
+.vehicle-option{display:flex;justify-content:space-between;padding:12px 20px;border:1px solid #eee;border-radius:12px;margin-bottom:12px;cursor:pointer;transition:all 0.3s;font-weight:500;}
+.vehicle-option:hover{background:#fff4ec;border-color:#ff7a00;}
+.cross:hover{font-size:27px;color:#ff7a00;cursor:pointer;}
+.summary-item{margin:10px 0;text-align:left;}
+input[type=text], input[type=tel]{margin-top:5px;}
+.support-box{margin-top:5px;padding:1px;color:#333;font-weight:600;margin-left:70px;margin-right:70px;}
+.support-box a{text-decoration:none;color:#ff7a00;margin-top:10px;margin-left:10px;}
+.support-box{display:flex;}
+.main_page_dawnloade_app{padding:7px;align-items:center;}
+.time-picker{display:flex;justify-content:space-between;margin-top:5px;}
+.time-picker select{width:32%;}
 
+/* Loader button */
+.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+.loading:after {
+  content: "";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #fff;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  transform: translateY(-50%);
+}
+@keyframes spin {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+</style>
 </head>
-
 <body>
-  <!--header section start -->
-  <div id="index.html" class="header_section">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6 col-lg-3">
-          <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
-        </div>
-        <div class="col-sm-6 col-lg-9">
-          <div class="menu_text">
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#taxis">Taxi</a></li>
-              <li><a href="#booking">Booking</a></li>
-              <li><a href="#contact">Contact Us</a></li>
-              <li><a href="#"><img src="images/search-icon.png"></a></li>
-              <div id="myNav" class="overlay">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <div class="overlay-content">
-                  <a href="index.html">Home</a>
-                  <a href="#about">About</a>
-                  <a href="#taxis">Taxi</a>
-                  <a href="#booking">Booking</a>
-                  <a href="#contact">Contact Us</a>
-                </div>
-              </div>
-              <span style="font-size:33px;cursor:pointer; color: #ffffff;" onclick="openNav()"><img
-                  src="images/toggle-menu.png" class="toggle_menu"></span>
-          </div>
-          </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- header section end -->
-  <!-- banner section start -->
-  <div class="banner_section">
-    <div class="container-fluid">
-      <div id="main_slider" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="book_now">
-                  <h1 class="book_text">FOR SUPPORT</h1>
-                  <h1 class="call_text">(+91) 7522020838</h1>
-                </div>
-                <div class="image_1"><img src="images/img-1.png"></div>
-              </div>
-              <div class="col-md-6">
-                <h1 class="booking_text">Get The App Now, Start Using Mr Cuban</h1>
-                <div class="contact_bg" style="text-align: center;background-color: rgb(26,26,26);">
-                  <a href="https://github.com/RadheRadheJi77/Mrcuban-Car-Rental/releases/download/tag.1/Mr_Cuban_Taxi_Service_New_Version.apk"><img src="./images/cuban_qr_code.png" alt="Mr Cuban QR Code" 
-                  style="width:250px;height: 250px;object-fit: cover;border: 2px solid white;"></a>
-                  <p style="color: rgb(177, 169, 169);">Scan This or click on QR To Download Mr. Cuban App For Ride Booking</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="book_now">
-                  <h1 class="book_text">FOR SUPPORT</h1>
-                  <h1 class="call_text">(+91) 7522020838</h1>
-                </div>
-                <div class="image_1"><img src="images/img-1.png"></div>
-              </div>
-              <div class="col-md-6">
-                <h1 class="booking_text">Book a City Taxi to your destination in town</h1>
-                <div class="contact_bg">
-                  <div class="input_main">
-                    <div class="container">
-                      <h2 class="request_text">Your everyday travel partner</h2>
-                      <form action="/action_page.php">
-                        <div class="form-group">
-                          <input type="text" class="email-bt" placeholder="PICKUP" name="Name">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="email-bt" placeholder="DROP" name="Email">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="email-bt" placeholder="WHEN" name="Email">
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="send_bt"><a href="#">SEARCH</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="book_now">
-                  <h1 class="book_text">FOR SUPPORT</h1>
-                  <h1 class="call_text">(+91) 7522020838</h1>
-                </div>
-                <div class="image_1"><img src="images/car.png"></div>
-              </div>
-              <div class="col-md-6">
-                <h1 class="booking_text">Book a City Taxi to your destination in town</h1>
-                <div class="contact_bg">
-                  <div class="input_main">
-                    <div class="container">
-                      <h2 class="request_text">Your everyday travel partner</h2>
-                      <form action="/action_page.php">
-                        <div class="form-group">
-                          <input type="text" class="email-bt" placeholder="PICKUP" name="Name">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="email-bt" placeholder="DROP" name="Email">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="email-bt" placeholder="WHEN" name="Email">
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="send_bt"><a href="#">SEARCH</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-          <i class="fa fa-angle-left"></i></a>
-        </a>
-        <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-          <i class="fa fa-angle-right"></i>
-        </a>
-        </a>
-      </div>
+<div class="container">
+<h1>MR CUBAN Booking</h1>
 
-    </div>
-  </div>
-  <!-- banner section end -->
-  <!-- our taxis section start -->
-  <div id="taxis" class="taxis_section layout_padding">
-    <div class="container">
-      <h1 class="our_text">Our <span style="color: #f4db31;">Taxi</span></h1>
-      <div class="taxis_section_2">
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="taxi_main">
-              <div class="round_1">01</div>
-              <h2 class="carol_text">CAR 1</h2>
-              <p class="reader_text">act that a reader will be<br>
-                distracted </p>
-              <div class="images_2"><a href="#"><img src="images/img-2.png"></a></div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="taxi_main">
-              <div class="round_1">02</div>
-              <h2 class="carol_text">CAR 2</h2>
-              <p class="reader_text">act that a reader will be<br>
-                distracted </p>
-              <div class="images_2"><img src="images/img-2.png"></a></div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="taxi_main">
-              <div class="round_1">03</div>
-              <h2 class="carol_text">CAR 3</h2>
-              <p class="reader_text">act that a reader will be<br>
-                distracted </p>
-              <div class="images_2"><img src="images/img-2.png"></a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- our taxis section end -->
-  <!-- why ride section start -->
-  <div id="booking" class="ride_section layout_padding">
-    <div class="container">
-      <div class="ride_main">
-        <h1 class="ride_text">Why Ride <span style="color: #f4db31;">With Uloax</span></h1>
-      </div>
-    </div>
-  </div>
-  <div class="ride_section_2 layout_padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="image_3"><img src="images/img-3.png"></div>
-        </div>
-        <div class="col-sm-8">
-          <h1 class="cabe_text">Uloax for Every Pocket</h1>
-          <p class="long_text">It is a long established fact that a reader will be distracted by the readable content of
-            a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as It is a long established fact that a reader will be distracted by the readable c
-          </p>
-          <div class="book_bt"><a href="#">BOOK NOW</a></div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8">
-          <h1 class="secure_text">Secure and Safer Rides</h1>
-          <p class="long_text_2">It is a long established fact that a reader will be distracted by the readable content
-            of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as It is a long established fact that a reader will be distracted by the readable c
-          </p>
-          <div class="book_bt_2"><a href="#">BOOK NOW</a></div>
-        </div>
-        <div class="col-sm-4">
-          <div class="image_3"><img src="images/img-4.png"></div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="image_3"><img src="images/img-5.png"></div>
-        </div>
-        <div class="col-sm-8">
-          <h1 class="cabe_text">Uloax for Every Pocket</h1>
-          <p class="long_text">It is a long established fact that a reader will be distracted by the readable content of
-            a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as It is a long established fact that a reader will be distracted by the readable c
-          </p>
-          <div class="book_bt"><a href="#">BOOK NOW</a></div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8">
-          <h1 class="secure_text">Secure and Safer Rides</h1>
-          <p class="long_text_2">It is a long established fact that a reader will be distracted by the readable content
-            of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as It is a long established fact that a reader will be distracted by the readable c
-          </p>
-          <div class="book_bt_2"><a href="#">BOOK NOW</a></div>
-        </div>
-        <div class="col-sm-4">
-          <div class="image_3"><img src="images/img-5.png"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- why ride section end -->
-  <!-- location section start -->
-  <div id="contact" class="location_sectin layout_padding">
-    <div class="container-fluid">
-      <div class="location_main">
-        <div class="row">
-          <div class="col-sm-4"></div>
-          <div class="col-sm-5">
-            <div class="download_text">DOWNLOAD<br><span style="color: #fffcf4;">OUR APP TODAY</span></div>
-          </div>
-          <div class="col-sm-3">
-            <div class="image_7"><img src="images/img-7.png"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- download section end -->
-  <!-- section footer start -->
-  <div class="section_footer ">
-    <div class="container">
-      <div class="footer_section_2">
-        <div class="row">
-          <div class="col-sm-6 col-md-6 col-lg-3">
-            <h2 class="account_text">Address</h2>
-            <p class="ipsum_text">It is a long established fact that a reader will be distracted by the readable content
-              of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-              distribution of letters, </p>
-          </div>
-          <div class="col-sm-6 col-md-6 col-lg-3">
-            <h2 class="account_text">Links</h2>
-            <div class="image-icon"><img src="images/bulit-icon.png"><span class="fb_text"><a href="#">Home</span></a>
-            </div>
-            <div class="image-icon"><img src="images/bulit-icon.png"><span class="fb_text"><a href="#">About</span></a>
-            </div>
-            <div class="image-icon"><img src="images/bulit-icon.png"><span class="fb_text"><a href="#">Taxi</span></a>
-            </div>
-            <div class="image-icon"><img src="images/bulit-icon.png"><span class="fb_text"><a
-                  href="#">Booking</span></a></div>
-            <div class="image-icon"><img src="images/bulit-icon.png"><span class="fb_text"><a href="#">Contact
-                  Us</span></a></div>
-          </div>
-          <div class="col-sm-6 col-md-6 col-lg-3">
-            <h2 class="account_text">Follow Us</h2>
-            <div class="image-icon"><img src="images/fb-icon.png"><span class="fb_text"><a href="#">Facebook</a></span>
-            </div>
-            <div class="image-icon"><img src="images/twitter-icon.png"><span class="fb_text"><a
-                  href="#">Twitter</a></span></div>
-            <div class="image-icon"><img src="images/in-icon.png"><span class="fb_text"><a href="#">Linkedin</a></span>
-            </div>
-            <div class="image-icon"><img src="images/youtube-icon.png"><span class="fb_text"><a
-                  href="#">Youtube</a></span></div>
-            <div class="image-icon"><img src="images/instagram-icon.png"><span class="fb_text"><a
-                  href="#">Instagram</a></span></div>
-          </div>
-          <div class="col-sm-6 col-md-6 col-lg-3">
-            <h2 class="adderess_text">Newsletter</h2>
-            <input type="" class="email_text" placeholder="Enter Your Email" name="Enter Your Email">
-            <button class="subscribr_bt">SUBSCRIBE</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <!-- section footer end -->
-  <!-- copyright section start -->
-  <div class="copyright_section">
-    <div class="container">
-      <p class="copyright">2019 All Rights Reserved. <a href="https://html.design">Free html Templates</a></p>
-    </div>
-  </div>
+<!-- Toggle -->
+<div class="toggle-container">
+  <span class="toggle-label">One-way</span>
+  <label class="switch">
+    <input type="checkbox" id="tripToggle">
+    <span class="slider"></span>
+  </label>
+  <span id="tripLabel" style="margin-left:10px;">Round-trip</span>
+</div>
 
-  <!-- Javascript files-->
-  <script src="js/jquery.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/jquery-3.0.0.min.js"></script>
-  <script src="js/plugin.js"></script>
-  <!-- sidebar -->
-  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-  <script src="js/custom.js"></script>
-  <!-- javascript -->
-  <script src="js/owl.carousel.js"></script>
-  <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $(".fancybox").fancybox({
-        openEffect: "none",
-        closeEffect: "none"
-      });
+<label>Pickup Address</label>
+<select id="pickup" onchange="checkOtherPlace(this)">
+  <option value="Lalganj">Lalganj</option>
+  <option value="MCF Lalganj">MCF Lalganj</option>
+  <option value="Other place">Other place</option>
+</select>
 
-      $(".zoom").hover(function () {
+<label>Drop Address</label>
+<select id="drop" onchange="checkOtherPlace(this)">
+  <option value="Kanpur">Kanpur</option>
+  <option value="Lucknow">Lucknow</option>
+  <option value="Other place">Other place</option>
+</select>
 
-        $(this).addClass('transition');
-      }, function () {
+<button onclick="openVehiclePopup()">Choose Vehicle</button>
 
-        $(this).removeClass('transition');
-      });
-    });
-  </script>
-  <script>
-    function openNav() {
-      document.getElementById("myNav").style.width = "100%";
-    }
+<!-- Support Option -->
+<div class="support-box">
+  <button class="main_page_dawnloade_app" onclick="window.open('https://drive.google.com/file/d/17FMjkXYGBzUCzXtl4TWYvV-whaHMQwD0/view?usp=drivesdk','_blank')">Download App</button>
+  <a href="tel:7522020838"> 📞Support:</a>
+</div>
+</div>
 
-    function closeNav() {
-      document.getElementById("myNav").style.width = "0%";
-    }
-  </script>
+<!-- Generic Popup -->
+<div class="popup" id="roundTripPopup">
+  <div class="popup-content">
+    <h2 id="popupTitle">Notice</h2>
+    <p id="popupMessage">🚖 Please download the app.</p>
+    <button onclick="window.open('https://drive.google.com/file/d/17FMjkXYGBzUCzXtl4TWYvV-whaHMQwD0/view?usp=drivesdk','_blank')">Download App</button>
+    <div class="cross" onclick="closePopup('roundTripPopup')">✖</div>
+  </div>
+</div>
+
+<!-- Vehicle Popup -->
+<div class="popup" id="vehiclePopup">
+  <div class="popup-content">
+    <h2>Select Vehicle</h2>
+    <div id="vehicleOptions"></div>
+    <button onclick="closePopup('vehiclePopup')">Cancel</button>
+  </div>
+</div>
+
+<!-- Time & User Details Popup -->
+<div class="popup" id="timePopup">
+  <div class="popup-content">
+    <h2>Pickup Time & Details</h2>
+    <label>Name (optional)</label>
+    <input type="text" id="userName" placeholder="Your Name">
+    <label>Mobile Number</label>
+    <input type="tel" id="userMobile" placeholder="Your Mobile Number">
+
+    <!-- ✅ New Date field -->
+    <label>Pickup Date</label>
+    <input type="date" id="rideDate">
+
+    <label>Pickup Time</label>
+    <div class="time-picker">
+      <select id="hour"></select>
+      <select id="minute"></select>
+      <select id="ampm">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
+    </div>
+    <button onclick="confirmRide(event)">Confirm Ride</button>
+    <button onclick="closePopup('timePopup')">Cancel</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+<script>
+emailjs.init("1RkWQI-5SnHjIcy2g");
+
+const tripToggle = document.getElementById('tripToggle');
+const tripLabel = document.getElementById('tripLabel');
+
+tripToggle.addEventListener('change', () => {
+  if(tripToggle.checked){
+    document.getElementById("popupTitle").textContent = "Round-trip Selected";
+    document.getElementById("popupMessage").textContent = "🚖 Please download the app for Round-trip booking.";
+    document.getElementById('roundTripPopup').style.display='flex';
+    tripToggle.checked=false;
+    tripLabel.textContent='Round-Trip';
+  } else tripLabel.textContent='Round-Trip';
+});
+
+function checkOtherPlace(selectBox){
+  if(selectBox.value === "Other place"){
+    document.getElementById("popupTitle").textContent = "Other Place Selected";
+    document.getElementById("popupMessage").textContent = "🚖 Please download the app for other places booking.";
+    document.getElementById("roundTripPopup").style.display = "flex";
+    selectBox.value = ""; 
+  }
+}
+
+function closePopup(id){ document.getElementById(id).style.display='none'; }
+
+function openVehiclePopup(){
+  const drop=document.getElementById('drop').value;
+  const vehicleOptionsDiv=document.getElementById('vehicleOptions');
+  vehicleOptionsDiv.innerHTML='';
+
+  let price = drop==="Kanpur"?1399:1499;
+  const vehicles = [
+    {name:"4 Seater",price:price},
+    {name:"6 Seater",price:price+500}
+  ];
+
+  vehicles.forEach(v=>{
+    const div=document.createElement('div');
+    div.className='vehicle-option';
+    div.innerHTML=`<span>${v.name}</span><span>₹${v.price}</span>`;
+    div.onclick=()=>{
+      closePopup('vehiclePopup');
+      selectedVehicle=v;
+      document.getElementById('timePopup').style.display='flex';
+      setDefaultTime();
+    };
+    vehicleOptionsDiv.appendChild(div);
+  });
+
+  document.getElementById('vehiclePopup').style.display='flex';
+}
+
+let selectedVehicle=null;
+
+// --- Time Handling ---
+const hourSelect = document.getElementById('hour');
+const minuteSelect = document.getElementById('minute');
+const ampmSelect = document.getElementById('ampm');
+
+// Populate hours and minutes
+for(let i=1;i<=12;i++){ let h=i<10?'0'+i:i; hourSelect.innerHTML += `<option value="${h}">${h}</option>`;}
+for(let i=0;i<60;i++){ let m=i<10?'0'+i:i; minuteSelect.innerHTML += `<option value="${m}">${m}</option>`;}
+
+// Set default time (+3 hours)
+function setDefaultTime(){
+  let now = new Date();
+  now.setHours(now.getHours()+3);
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let ampm = hours >=12 ? 'PM':'AM';
+  hours = hours%12 || 12;
+  hourSelect.value = hours.toString().padStart(2,'0');
+  minuteSelect.value = minutes.toString().padStart(2,'0');
+  ampmSelect.value = ampm;
+}
+
+function getSelectedTime(){
+  return `${hourSelect.value}:${minuteSelect.value} ${ampmSelect.value}`;
+}
+
+// --- Confirm Ride with Loader ---
+function confirmRide(event){
+  const btn = event.target;
+  const originalText = btn.innerText;
+  btn.classList.add("loading");
+  btn.innerText = "Processing...";
+
+  const name=document.getElementById('userName').value || "N/A";
+  const mobile=document.getElementById('userMobile').value.trim();
+  const pickup=document.getElementById('pickup').value;
+  const drop=document.getElementById('drop').value;
+  const date=document.getElementById('rideDate').value;
+  const time=getSelectedTime();
+
+  // ✅ Regex for Indian mobile validation
+  const phonePattern = /^[6-9]\d{9}$/;
+
+  if(!phonePattern.test(mobile)){ 
+    alert("Please enter a valid Indian mobile number (10 digits, starting with 6-9)."); 
+    btn.classList.remove("loading");
+    btn.innerText = originalText;
+    return; 
+  }
+
+  if(!date){
+    alert("Please select a pickup date!");
+    btn.classList.remove("loading");
+    btn.innerText = originalText;
+    return;
+  }
+
+  const tripType="One-way";
+
+  const templateParams={
+    to_name:"MR CUBAN Admin",
+    user_name:name,
+    user_mobile:mobile,
+    pickup:pickup,
+    drop:drop,
+    tripType:tripType,
+    vehicle:selectedVehicle.name,
+    price:selectedVehicle.price,
+    date:date,   // ✅ New date field sent
+    time:time
+  };
+
+  emailjs.send("service_noq572r","template_imymtxh",templateParams)
+  .then(response=>{
+      console.log("Email sent!",response);
+
+      const rideData = encodeURIComponent(JSON.stringify({
+        name,mobile,pickup,drop,tripType,vehicle:selectedVehicle.name,price:selectedVehicle.price,date,time
+      }));
+      window.open(`ride-confirmed.html?data=${rideData}`, '_blank');
+
+      btn.classList.remove("loading");
+      btn.innerText = originalText;
+
+  },error=>{
+      console.log("Email failed...",error);
+      alert("Failed! Please try again.");
+      btn.classList.remove("loading");
+      btn.innerText = originalText;
+  });
+}
+
+</script>
 </body>
-
 </html>
