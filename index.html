@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MR CUBAN Booking</title>
+<link rel="icon" type="image/x-icon" href="./icon.png">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:linear-gradient(135deg,#fffaf0,#ffe5b4);display:flex;align-items:center;justify-content:center;min-height:100vh;}
@@ -146,6 +147,7 @@ input[type=text], input[type=tel]{margin-top:5px;}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+
 <script>
 emailjs.init("1RkWQI-5SnHjIcy2g");
 
@@ -153,54 +155,58 @@ const tripToggle = document.getElementById('tripToggle');
 const tripLabel = document.getElementById('tripLabel');
 
 tripToggle.addEventListener('change', () => {
-  if(tripToggle.checked){
+  if (tripToggle.checked) {
     document.getElementById("popupTitle").textContent = "Round-trip Selected";
     document.getElementById("popupMessage").textContent = "🚖 Please download the app for Round-trip booking.";
-    document.getElementById('roundTripPopup').style.display='flex';
-    tripToggle.checked=false;
-    tripLabel.textContent='Round-Trip';
-  } else tripLabel.textContent='Round-Trip';
+    document.getElementById('roundTripPopup').style.display = 'flex';
+    tripToggle.checked = false;
+    tripLabel.textContent = 'Round-Trip';
+  } else {
+    tripLabel.textContent = 'Round-Trip';
+  }
 });
 
-function checkOtherPlace(selectBox){
-  if(selectBox.value === "Other place"){
+function checkOtherPlace(selectBox) {
+  if (selectBox.value === "Other place") {
     document.getElementById("popupTitle").textContent = "Other Place Selected";
     document.getElementById("popupMessage").textContent = "🚖 Please download the app for other places booking.";
     document.getElementById("roundTripPopup").style.display = "flex";
-    selectBox.value = ""; 
+    selectBox.value = "";
   }
 }
 
-function closePopup(id){ document.getElementById(id).style.display='none'; }
+function closePopup(id) {
+  document.getElementById(id).style.display = 'none';
+}
 
-function openVehiclePopup(){
-  const drop=document.getElementById('drop').value;
-  const vehicleOptionsDiv=document.getElementById('vehicleOptions');
-  vehicleOptionsDiv.innerHTML='';
+function openVehiclePopup() {
+  const drop = document.getElementById('drop').value;
+  const vehicleOptionsDiv = document.getElementById('vehicleOptions');
+  vehicleOptionsDiv.innerHTML = '';
 
-  let price = drop==="Kanpur"?1399:1499;
+  let price = drop === "Kanpur" ? 1399 : 1499;
   const vehicles = [
-    {name:"4 Seater",price:price},
-    {name:"6 Seater",price:price+500}
+    { name: "4 Seater", price: price },
+    { name: "6 Seater", price: price + 500 }
   ];
 
-  vehicles.forEach(v=>{
-    const div=document.createElement('div');
-    div.className='vehicle-option';
-    div.innerHTML=`<span>${v.name}</span><span>₹${v.price}</span>`;
-    div.onclick=()=>{
+  vehicles.forEach(v => {
+    const div = document.createElement('div');
+    div.className = 'vehicle-option';
+    div.innerHTML = `<span>${v.name}</span><span>₹${v.price}</span>`;
+    div.onclick = () => {
       closePopup('vehiclePopup');
-      selectedVehicle=v;
-      document.getElementById('timePopup').style.display='flex';
+      selectedVehicle = v;
+      document.getElementById('timePopup').style.display = 'flex';
       setDefaultTime();
     };
     vehicleOptionsDiv.appendChild(div);
   });
 
-  document.getElementById('vehiclePopup').style.display='flex';
+  document.getElementById('vehiclePopup').style.display = 'flex';
 }
 
-let selectedVehicle=null;
+let selectedVehicle = null;
 
 // --- Time Handling ---
 const hourSelect = document.getElementById('hour');
@@ -208,92 +214,127 @@ const minuteSelect = document.getElementById('minute');
 const ampmSelect = document.getElementById('ampm');
 
 // Populate hours and minutes
-for(let i=1;i<=12;i++){ let h=i<10?'0'+i:i; hourSelect.innerHTML += `<option value="${h}">${h}</option>`;}
-for(let i=0;i<60;i++){ let m=i<10?'0'+i:i; minuteSelect.innerHTML += `<option value="${m}">${m}</option>`;}
+for (let i = 1; i <= 12; i++) {
+  let h = i < 10 ? '0' + i : i;
+  hourSelect.innerHTML += `<option value="${h}">${h}</option>`;
+}
+for (let i = 0; i < 60; i++) {
+  let m = i < 10 ? '0' + i : i;
+  minuteSelect.innerHTML += `<option value="${m}">${m}</option>`;
+}
 
 // Set default time (+3 hours)
-function setDefaultTime(){
+function setDefaultTime() {
   let now = new Date();
-  now.setHours(now.getHours()+3);
+  now.setHours(now.getHours() + 3);
   let hours = now.getHours();
   let minutes = now.getMinutes();
-  let ampm = hours >=12 ? 'PM':'AM';
-  hours = hours%12 || 12;
-  hourSelect.value = hours.toString().padStart(2,'0');
-  minuteSelect.value = minutes.toString().padStart(2,'0');
+  let ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  hourSelect.value = hours.toString().padStart(2, '0');
+  minuteSelect.value = minutes.toString().padStart(2, '0');
   ampmSelect.value = ampm;
 }
 
-function getSelectedTime(){
+function getSelectedTime() {
   return `${hourSelect.value}:${minuteSelect.value} ${ampmSelect.value}`;
 }
 
+// ✅ Set today's date as minimum in calendar
+const dateInput = document.getElementById("rideDate");
+const today = new Date();
+dateInput.min = today.toISOString().split("T")[0];
+
 // --- Confirm Ride with Loader ---
-function confirmRide(event){
+function confirmRide(event) {
   const btn = event.target;
   const originalText = btn.innerText;
   btn.classList.add("loading");
   btn.innerText = "Processing...";
 
-  const name=document.getElementById('userName').value || "N/A";
-  const mobile=document.getElementById('userMobile').value.trim();
-  const pickup=document.getElementById('pickup').value;
-  const drop=document.getElementById('drop').value;
-  const date=document.getElementById('rideDate').value;
-  const time=getSelectedTime();
+  const name = document.getElementById('userName').value || "N/A";
+  const mobile = document.getElementById('userMobile').value.trim();
+  const pickup = document.getElementById('pickup').value;
+  const drop = document.getElementById('drop').value;
+  const date = document.getElementById('rideDate').value;
+  const time = getSelectedTime();
 
   // ✅ Regex for Indian mobile validation
   const phonePattern = /^[6-9]\d{9}$/;
 
-  if(!phonePattern.test(mobile)){ 
-    alert("Please enter a valid Indian mobile number (10 digits, starting with 6-9)."); 
+  if (!phonePattern.test(mobile)) {
+    alert("Please enter a valid Indian mobile number (10 digits, starting with 6-9).");
     btn.classList.remove("loading");
     btn.innerText = originalText;
-    return; 
+    return;
   }
 
-  if(!date){
+  if (!date) {
     alert("Please select a pickup date!");
     btn.classList.remove("loading");
     btn.innerText = originalText;
     return;
   }
 
-  const tripType="One-way";
+  // ✅ Combine date + time and check at least +3 hours
+  const [hh, mm, ampm] = time.split(/[: ]/); // ["05","30","PM"]
+  let pickupHour = parseInt(hh, 10);
+  const pickupMinute = parseInt(mm, 10);
+  if (ampm === "PM" && pickupHour !== 12) pickupHour += 12;
+  if (ampm === "AM" && pickupHour === 12) pickupHour = 0;
 
-  const templateParams={
-    to_name:"MR CUBAN Admin",
-    user_name:name,
-    user_mobile:mobile,
-    pickup:pickup,
-    drop:drop,
-    tripType:tripType,
-    vehicle:selectedVehicle.name,
-    price:selectedVehicle.price,
-    date:date,   // ✅ New date field sent
-    time:time
+  const pickupDateTime = new Date(date);
+  pickupDateTime.setHours(pickupHour, pickupMinute, 0, 0);
+
+  const minAllowed = new Date();
+  minAllowed.setHours(minAllowed.getHours() + 3);
+
+  if (pickupDateTime < minAllowed) {
+    alert("Pickup time must be at least 3 hours from now.");
+    btn.classList.remove("loading");
+    btn.innerText = originalText;
+    return;
+  }
+
+  const tripType = "One-way";
+
+  const templateParams = {
+    to_name: "MR CUBAN Admin",
+    user_name: name,
+    user_mobile: mobile,
+    pickup: pickup,
+    drop: drop,
+    tripType: tripType,
+    vehicle: selectedVehicle.name,
+    price: selectedVehicle.price,
+    date: date,
+    time: time
   };
 
-  emailjs.send("service_noq572r","template_imymtxh",templateParams)
-  .then(response=>{
-      console.log("Email sent!",response);
+  emailjs.send("service_noq572r", "template_imymtxh", templateParams)
+    .then(response => {
+      console.log("Email sent!", response);
 
       const rideData = encodeURIComponent(JSON.stringify({
-        name,mobile,pickup,drop,tripType,vehicle:selectedVehicle.name,price:selectedVehicle.price,date,time
+        name, mobile, pickup, drop, tripType,
+        vehicle: selectedVehicle.name, price: selectedVehicle.price,
+        date, time
       }));
       window.open(`ride-confirmed.html?data=${rideData}`, '_blank');
 
       btn.classList.remove("loading");
       btn.innerText = originalText;
 
-  },error=>{
-      console.log("Email failed...",error);
+    }, error => {
+      console.log("Email failed...", error);
       alert("Failed! Please try again.");
       btn.classList.remove("loading");
       btn.innerText = originalText;
-  });
+    });
 }
-
 </script>
+
+
+
 </body>
 </html>
