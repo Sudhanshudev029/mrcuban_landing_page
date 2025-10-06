@@ -1,340 +1,643 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MR CUBAN Booking</title>
-<link rel="icon" type="image/x-icon" href="./icon.png">
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:linear-gradient(135deg,#fffaf0,#ffe5b4);display:flex;align-items:center;justify-content:center;min-height:100vh;}
-.container{background:#fff;border-radius:20px;padding:30px 25px;width:100%;max-width:450px;box-shadow:0 10px 25px rgba(0,0,0,0.1);text-align:center;}
-h1{color:#ff7a00;font-size:28px;margin-bottom:25px;font-weight:700;}
-label{font-weight:600;color:#333;display:block;margin-bottom:8px;margin-top:15px;text-align:left;}
-select,input{width:100%;padding:12px 15px;border-radius:12px;border:1px solid #ddd;font-size:16px;transition:border 0.3s;}
-select:focus,input:focus{border-color:#ff7a00;outline:none;}
-button{width:100%;padding:14px;border:none;border-radius:12px;background:#ff7a00;color:#fff;font-size:18px;font-weight:600;margin-top:25px;cursor:pointer;transition:background 0.3s, transform 0.2s;}
-button:hover{background:#ff9500;transform:translateY(-2px);}
-.toggle-container{display:flex;justify-content:center;align-items:center;margin-bottom:20px;}
-.toggle-label{margin-right:10px;font-weight:600;color:#333;}
-.switch{position:relative;display:inline-block;width:60px;height:30px;}
-.switch input{opacity:0;width:0;height:0;}
-.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#ccc;border-radius:34px;transition:0.4s;}
-.slider:before{position:absolute;content:"";height:22px;width:22px;left:4px;bottom:4px;background-color:white;border-radius:50%;transition:0.4s;}
-input:checked+.slider{background-color:#ff7a00;}
-input:checked+.slider:before{transform:translateX(30px);}
-.popup{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:1000;}
-.popup-content{background:#fff;border-radius:18px;width:90%;max-width:400px;padding:25px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.15);}
-.popup h2{color:#ff7a00;margin-bottom:20px;}
-.vehicle-option{display:flex;justify-content:space-between;padding:12px 20px;border:1px solid #eee;border-radius:12px;margin-bottom:12px;cursor:pointer;transition:all 0.3s;font-weight:500;}
-.vehicle-option:hover{background:#fff4ec;border-color:#ff7a00;}
-.cross:hover{font-size:27px;color:#ff7a00;cursor:pointer;}
-.summary-item{margin:10px 0;text-align:left;}
-input[type=text], input[type=tel]{margin-top:5px;}
-.support-box{margin-top:5px;padding:1px;color:#333;font-weight:600;margin-left:70px;margin-right:70px;}
-.support-box a{text-decoration:none;color:#ff7a00;margin-top:10px;margin-left:10px;}
-.support-box{display:flex;}
-.main_page_dawnloade_app{padding:7px;align-items:center;}
-.time-picker{display:flex;justify-content:space-between;margin-top:5px;}
-.time-picker select{width:32%;}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MR CUBAN Booking</title>
+    <link rel="icon" type="image/x-icon" href="./icon.png">
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #fffaf0, #ffe5b4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .container {
+        background: #fff;
+        border-radius: 20px;
+        padding: 30px 25px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h1 {
+        color: #ff7a00;
+        font-size: 28px;
+        margin-bottom: 25px;
+        font-weight: 700;
+      }
+      label {
+        font-weight: 600;
+        color: #333;
+        display: block;
+        margin-bottom: 8px;
+        margin-top: 15px;
+        text-align: left;
+      }
+      select,
+      input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 12px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        transition: border 0.3s;
+      }
+      select:focus,
+      input:focus {
+        border-color: #ff7a00;
+        outline: none;
+      }
+      button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 12px;
+        background: #ff7a00;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 25px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+      }
+      button:hover {
+        background: #ff9500;
+        transform: translateY(-2px);
+      }
+      .toggle-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .toggle-label {
+        margin-right: 10px;
+        font-weight: 600;
+        color: #333;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        border-radius: 34px;
+        transition: 0.4s;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        border-radius: 50%;
+        transition: 0.4s;
+      }
+      input:checked + .slider {
+        background-color: #ff7a00;
+      }
+      input:checked + .slider:before {
+        transform: translateX(30px);
+      }
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .popup-content {
+        background: #fff;
+        border-radius: 18px;
+        width: 90%;
+        max-width: 400px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+      .popup h2 {
+        color: #ff7a00;
+        margin-bottom: 20px;
+      }
+      .vehicle-option {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 20px;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 500;
+      }
+      .vehicle-option:hover {
+        background: #fff4ec;
+        border-color: #ff7a00;
+      }
+      .cross:hover {
+        font-size: 27px;
+        color: #ff7a00;
+        cursor: pointer;
+      }
+      .summary-item {
+        margin: 10px 0;
+        text-align: left;
+      }
+      input[type="text"],
+      input[type="tel"] {
+        margin-top: 5px;
+      }
+      .support-box {
+        margin-top: 5px;
+        padding: 1px;
+        color: #333;
+        font-weight: 600;
+        margin-left: 70px;
+        margin-right: 70px;
+      }
+      .support-box a {
+        text-decoration: none;
+        color: #ff7a00;
+        margin-top: 10px;
+        margin-left: 10px;
+      }
+      .support-box {
+        display: flex;
+      }
+      .main_page_dawnloade_app {
+        padding: 7px;
+        align-items: center;
+      }
+      .time-picker {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+      }
+      .time-picker select {
+        width: 32%;
+      }
+      .loading {
+        position: relative;
+        pointer-events: none;
+        opacity: 0.8;
+      }
+      .loading:after {
+        content: "";
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        width: 18px;
+        height: 18px;
+        border: 3px solid #fff;
+        border-top: 3px solid transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        transform: translateY(-50%);
+      }
+      @keyframes spin {
+        from {
+          transform: translateY(-50%) rotate(0deg);
+        }
+        to {
+          transform: translateY(-50%) rotate(360deg);
+        }
+      }
 
-/* Loader button */
-.loading {
-  position: relative;
-  pointer-events: none;
-  opacity: 0.8;
-}
-.loading:after {
-  content: "";
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  border: 3px solid #fff;
-  border-top: 3px solid transparent;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  transform: translateY(-50%);
-}
-@keyframes spin {
-  from { transform: translateY(-50%) rotate(0deg); }
-  to { transform: translateY(-50%) rotate(360deg); }
-}
-</style>
-</head>
-<body>
-<div class="container">
-<h1>MR CUBAN Booking</h1>
+      /* 🔸 Popup for Name & Mobile */
+      #userPopup {
+        display: flex;
+      }
+      #userPopup .popup-content input {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>MR CUBAN Booking</h1>
 
-<!-- Toggle -->
-<div class="toggle-container">
-  <span class="toggle-label">One-way</span>
-  <label class="switch">
-    <input type="checkbox" id="tripToggle">
-    <span class="slider"></span>
-  </label>
-  <span id="tripLabel" style="margin-left:10px;">Round-trip</span>
-</div>
+      <div class="toggle-container">
+        <span class="toggle-label">One-way</span>
+        <label class="switch">
+          <input type="checkbox" id="tripToggle" />
+          <span class="slider"></span>
+        </label>
+        <span id="tripLabel" style="margin-left: 10px">Round-trip</span>
+      </div>
 
-<label>Pickup Address</label>
-<select id="pickup" onchange="checkOtherPlace(this)">
-  <option value="Lalganj">Lalganj</option>
-  <option value="MCF Lalganj">MCF Lalganj</option>
-  <option value="Other place">Other place</option>
-</select>
-
-<label>Drop Address</label>
-<select id="drop" onchange="checkOtherPlace(this)">
-  <option value="Kanpur">Kanpur</option>
-  <option value="Lucknow">Lucknow</option>
-  <option value="Other place">Other place</option>
-</select>
-
-<button onclick="openVehiclePopup()">Choose Vehicle</button>
-
-<!-- Support Option -->
-<div class="support-box">
-  <button class="main_page_dawnloade_app" onclick="window.open('https://drive.google.com/file/d/17FMjkXYGBzUCzXtl4TWYvV-whaHMQwD0/view?usp=drivesdk','_blank')">Download App</button>
-  <a href="tel:7522020838"> 📞Support:</a>
-</div>
-</div>
-
-<!-- Generic Popup -->
-<div class="popup" id="roundTripPopup">
-  <div class="popup-content">
-    <h2 id="popupTitle">Notice</h2>
-    <p id="popupMessage">🚖 Please download the app.</p>
-    <button onclick="window.open('https://drive.google.com/file/d/17FMjkXYGBzUCzXtl4TWYvV-whaHMQwD0/view?usp=drivesdk','_blank')">Download App</button>
-    <div class="cross" onclick="closePopup('roundTripPopup')">✖</div>
-  </div>
-</div>
-
-<!-- Vehicle Popup -->
-<div class="popup" id="vehiclePopup">
-  <div class="popup-content">
-    <h2>Select Vehicle</h2>
-    <div id="vehicleOptions"></div>
-    <button onclick="closePopup('vehiclePopup')">Cancel</button>
-  </div>
-</div>
-
-<!-- Time & User Details Popup -->
-<div class="popup" id="timePopup">
-  <div class="popup-content">
-    <h2>Pickup Time & Details</h2>
-    <label>Name (optional)</label>
-    <input type="text" id="userName" placeholder="Your Name">
-    <label>Mobile Number</label>
-    <input type="tel" id="userMobile" placeholder="Your Mobile Number">
-
-    <!-- ✅ New Date field -->
-    <label>Pickup Date</label>
-    <input type="date" id="rideDate">
-
-    <label>Pickup Time</label>
-    <div class="time-picker">
-      <select id="hour"></select>
-      <select id="minute"></select>
-      <select id="ampm">
-        <option value="AM">AM</option>
-        <option value="PM">PM</option>
+      <label>Pickup Address</label>
+      <select id="pickup" onchange="checkOtherPlace(this)">
+        <option value="Lalganj">Lalganj</option>
+        <option value="MCF Lalganj">MCF Lalganj</option>
+        <option value="Other place">Other place</option>
       </select>
+
+      <label>Drop Address</label>
+      <select id="drop" onchange="checkOtherPlace(this)">
+        <option value="Kanpur">Kanpur</option>
+        <option value="Lucknow">Lucknow</option>
+        <option value="Other place">Other place</option>
+      </select>
+
+      <button onclick="openVehiclePopup()">Choose Vehicle</button>
+
+      <div class="support-box">
+        <button
+          class="main_page_dawnloade_app"
+          onclick="window.open('https://drive.google.com/file/d/17FMjkXYGBzUCzXtl4TWYvV-whaHMQwD0/view?usp=drivesdk','_blank')"
+        >
+          Download App
+        </button>
+        <a href="tel:7522020838"> 📞Support:</a>
+      </div>
     </div>
-    <button onclick="confirmRide(event)">Confirm Ride</button>
-    <button onclick="closePopup('timePopup')">Cancel</button>
-  </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <!-- Existing popups -->
+    <div class="popup" id="roundTripPopup">
+      <div class="popup-content">
+        <h2 id="popupTitle">Notice</h2>
+        <p id="popupMessage">🚖 Please download the app.</p>
+        <button
+          onclick="window.open('https://drive.google.com/file/d/17FMjkXYGBzUCzXtl4TWYvV-whaHMQwD0/view?usp=drivesdk','_blank')"
+        >
+          Download App
+        </button>
+        <div class="cross" onclick="closePopup('roundTripPopup')">✖</div>
+      </div>
+    </div>
 
-<script>
-emailjs.init("1RkWQI-5SnHjIcy2g");
+    <div class="popup" id="vehiclePopup">
+      <div class="popup-content">
+        <h2>Select Vehicle</h2>
+        <div id="vehicleOptions"></div>
+        <button onclick="closePopup('vehiclePopup')">Cancel</button>
+      </div>
+    </div>
 
-const tripToggle = document.getElementById('tripToggle');
-const tripLabel = document.getElementById('tripLabel');
+    <div class="popup" id="timePopup">
+      <div class="popup-content">
+        <h2>Pickup Time & Details</h2>
+        <label>Name</label>
+        <input type="text" id="userName" placeholder="Your Name" />
+        <label>Mobile Number</label>
+        <input type="tel" id="userMobile" placeholder="Your Mobile Number" />
+        <!-- DATE added -->
+        <label>Pickup Date</label>
+        <input
+          type="date"
+          id="pickupDate"
+          style="
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            margin-top: 8px;
+          "
+        />
+        <label>Pickup Time</label>
+        <div class="time-picker">
+          <select id="hour"></select>
+          <select id="minute"></select>
+          <select id="ampm">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+        <button onclick="confirmRide(event)">Confirm Ride</button>
+        <button onclick="closePopup('timePopup')">Cancel</button>
+      </div>
+    </div>
 
-tripToggle.addEventListener('change', () => {
-  if (tripToggle.checked) {
-    document.getElementById("popupTitle").textContent = "Round-trip Selected";
-    document.getElementById("popupMessage").textContent = "🚖 Please download the app for Round-trip booking.";
-    document.getElementById('roundTripPopup').style.display = 'flex';
-    tripToggle.checked = false;
-    tripLabel.textContent = 'Round-Trip';
-  } else {
-    tripLabel.textContent = 'Round-Trip';
-  }
-});
+    <!-- 🔸 Name & Mobile Auto Popup -->
+    <div id="userPopup" class="popup">
+      <div class="popup-content">
+        <h2>Welcome to MR CUBAN 🚖</h2>
+        <p>Please enter your details to continue</p>
+        <input type="text" id="popupName" placeholder="Enter your name" />
+        <input
+          type="tel"
+          id="popupMobile"
+          placeholder="Enter mobile number"
+          maxlength="10"
+        />
+        <button onclick="saveUserInfo()">Continue</button>
+      </div>
+    </div>
 
-function checkOtherPlace(selectBox) {
-  if (selectBox.value === "Other place") {
-    document.getElementById("popupTitle").textContent = "Other Place Selected";
-    document.getElementById("popupMessage").textContent = "🚖 Please download the app for other places booking.";
-    document.getElementById("roundTripPopup").style.display = "flex";
-    selectBox.value = "";
-  }
-}
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script>
+      emailjs.init("1RkWQI-5SnHjIcy2g");
 
-function closePopup(id) {
-  document.getElementById(id).style.display = 'none';
-}
+      const tripToggle = document.getElementById("tripToggle");
+      const tripLabel = document.getElementById("tripLabel");
+      tripToggle.addEventListener("change", () => {
+        if (tripToggle.checked) {
+          document.getElementById("popupTitle").textContent =
+            "Round-trip Selected";
+          document.getElementById("popupMessage").textContent =
+            "🚖 Please download the app for Round-trip booking.";
+          document.getElementById("roundTripPopup").style.display = "flex";
+          tripToggle.checked = false;
+          tripLabel.textContent = "Round-Trip";
+        } else tripLabel.textContent = "Round-Trip";
+      });
 
-function openVehiclePopup() {
-  const drop = document.getElementById('drop').value;
-  const vehicleOptionsDiv = document.getElementById('vehicleOptions');
-  vehicleOptionsDiv.innerHTML = '';
+      function checkOtherPlace(selectBox) {
+        if (selectBox.value === "Other place") {
+          document.getElementById("popupTitle").textContent =
+            "Other Place Selected";
+          document.getElementById("popupMessage").textContent =
+            "🚖 Please download the app for other places booking.";
+          document.getElementById("roundTripPopup").style.display = "flex";
+          selectBox.value = "";
+        }
+      }
 
-  let price = drop === "Kanpur" ? 1399 : 1499;
-  const vehicles = [
-    { name: "4 Seater", price: price },
-    { name: "6 Seater", price: price + 500 }
-  ];
+      function closePopup(id) {
+        document.getElementById(id).style.display = "none";
+      }
 
-  vehicles.forEach(v => {
-    const div = document.createElement('div');
-    div.className = 'vehicle-option';
-    div.innerHTML = `<span>${v.name}</span><span>₹${v.price}</span>`;
-    div.onclick = () => {
-      closePopup('vehiclePopup');
-      selectedVehicle = v;
-      document.getElementById('timePopup').style.display = 'flex';
-      setDefaultTime();
-    };
-    vehicleOptionsDiv.appendChild(div);
-  });
+      function openVehiclePopup() {
+        const drop = document.getElementById("drop").value;
+        const vehicleOptionsDiv = document.getElementById("vehicleOptions");
+        vehicleOptionsDiv.innerHTML = "";
+        let price = drop === "Kanpur" ? 1399 : 1499;
+        const vehicles = [
+          { name: "4 Seater", price: price },
+          { name: "6 Seater", price: price + 500 },
+        ];
+        vehicles.forEach((v) => {
+          const div = document.createElement("div");
+          div.className = "vehicle-option";
+          div.innerHTML = `<span>${v.name}</span><span>₹${v.price}</span>`;
+          div.onclick = () => {
+            closePopup("vehiclePopup");
+            selectedVehicle = v;
+            document.getElementById("timePopup").style.display = "flex";
+            setDefaultTime();
+            // ⏰ Validate that ride is at least 3 hours later
+            function validatePickupTime() {
+              const dateInput = document.getElementById("pickupDate");
+              const hour = parseInt(document.getElementById("hour").value);
+              const minute = parseInt(document.getElementById("minute").value);
+              const ampm = document.getElementById("ampm").value;
 
-  document.getElementById('vehiclePopup').style.display = 'flex';
-}
+              // Current datetime
+              const now = new Date();
+              const minAllowed = new Date(now.getTime() + 3 * 60 * 60 * 1000); // +3 hours
 
-let selectedVehicle = null;
+              // Convert user selection into Date
+              const [yyyy, mm, dd] = dateInput.value.split("-");
+              let h = hour;
+              if (ampm === "PM" && h < 12) h += 12;
+              if (ampm === "AM" && h === 12) h = 0;
+              const selected = new Date(yyyy, mm - 1, dd, h, minute);
 
-// --- Time Handling ---
-const hourSelect = document.getElementById('hour');
-const minuteSelect = document.getElementById('minute');
-const ampmSelect = document.getElementById('ampm');
+              if (selected < minAllowed) {
+                alert("🚫 Please book ride at least 3 hours in advance!");
+                // Auto reset time & date to 3 hours later
+                const reset = minAllowed;
+                const resetDate = `${reset.getFullYear()}-${String(
+                  reset.getMonth() + 1
+                ).padStart(2, "0")}-${String(reset.getDate()).padStart(
+                  2,
+                  "0"
+                )}`;
+                const resetHour = reset.getHours() % 12 || 12;
+                const resetMinute = String(reset.getMinutes()).padStart(2, "0");
+                const resetAmPm = reset.getHours() >= 12 ? "PM" : "AM";
+                document.getElementById("pickupDate").value = resetDate;
+                document.getElementById("hour").value = String(
+                  resetHour
+                ).padStart(2, "0");
+                document.getElementById("minute").value = resetMinute;
+                document.getElementById("ampm").value = resetAmPm;
+                return false;
+              }
+              return true;
+            }
 
-// Populate hours and minutes
-for (let i = 1; i <= 12; i++) {
-  let h = i < 10 ? '0' + i : i;
-  hourSelect.innerHTML += `<option value="${h}">${h}</option>`;
-}
-for (let i = 0; i < 60; i++) {
-  let m = i < 10 ? '0' + i : i;
-  minuteSelect.innerHTML += `<option value="${m}">${m}</option>`;
-}
+            // ✅ Hook this check before confirming ride
+            const oldConfirmRide = confirmRide;
+            confirmRide = function (event) {
+              if (!validatePickupTime()) return; // stop if invalid
+              oldConfirmRide(event);
+            };
 
-// Set default time (+3 hours)
-function setDefaultTime() {
-  let now = new Date();
-  now.setHours(now.getHours() + 3);
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12 || 12;
-  hourSelect.value = hours.toString().padStart(2, '0');
-  minuteSelect.value = minutes.toString().padStart(2, '0');
-  ampmSelect.value = ampm;
-}
+            setDefaultDate();
+          };
+          vehicleOptionsDiv.appendChild(div);
+        });
+        document.getElementById("vehiclePopup").style.display = "flex";
+      }
 
-function getSelectedTime() {
-  return `${hourSelect.value}:${minuteSelect.value} ${ampmSelect.value}`;
-}
+      let selectedVehicle = null;
+      const hourSelect = document.getElementById("hour");
+      const minuteSelect = document.getElementById("minute");
+      const ampmSelect = document.getElementById("ampm");
 
-// ✅ Set today's date as minimum in calendar
-const dateInput = document.getElementById("rideDate");
-const today = new Date();
-dateInput.min = today.toISOString().split("T")[0];
+      for (let i = 1; i <= 12; i++) {
+        let h = i < 10 ? "0" + i : i;
+        hourSelect.innerHTML += `<option value="${h}">${h}</option>`;
+      }
+      for (let i = 0; i < 60; i++) {
+        let m = i < 10 ? "0" + i : i;
+        minuteSelect.innerHTML += `<option value="${m}">${m}</option>`;
+      }
 
-// --- Confirm Ride with Loader ---
-function confirmRide(event) {
-  const btn = event.target;
-  const originalText = btn.innerText;
-  btn.classList.add("loading");
-  btn.innerText = "Processing...";
+      function setDefaultTime() {
+        let now = new Date();
+        now.setHours(now.getHours() + 3);
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
+        hourSelect.value = hours.toString().padStart(2, "0");
+        minuteSelect.value = minutes.toString().padStart(2, "0");
+        ampmSelect.value = ampm;
+      }
 
-  const name = document.getElementById('userName').value || "N/A";
-  const mobile = document.getElementById('userMobile').value.trim();
-  const pickup = document.getElementById('pickup').value;
-  const drop = document.getElementById('drop').value;
-  const date = document.getElementById('rideDate').value;
-  const time = getSelectedTime();
+      // DATE handling: set min = today and default = today
+      function setDefaultDate() {
+        const dateInput = document.getElementById("pickupDate");
+        if (!dateInput) return;
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
+        const todayStr = `${yyyy}-${mm}-${dd}`;
+        dateInput.min = todayStr;
+        if (!dateInput.value) dateInput.value = todayStr;
+      }
 
-  // ✅ Regex for Indian mobile validation
-  const phonePattern = /^[6-9]\d{9}$/;
+      function getSelectedDate() {
+        const d = document.getElementById("pickupDate");
+        return d ? d.value : "";
+      }
 
-  if (!phonePattern.test(mobile)) {
-    alert("Please enter a valid Indian mobile number (10 digits, starting with 6-9).");
-    btn.classList.remove("loading");
-    btn.innerText = originalText;
-    return;
-  }
+      function getSelectedTime() {
+        return `${hourSelect.value}:${minuteSelect.value} ${ampmSelect.value}`;
+      }
 
-  if (!date) {
-    alert("Please select a pickup date!");
-    btn.classList.remove("loading");
-    btn.innerText = originalText;
-    return;
-  }
+      function confirmRide(event) {
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.classList.add("loading");
+        btn.innerText = "Processing...";
+        const name = document.getElementById("userName").value || "N/A";
+        const mobile = document.getElementById("userMobile").value;
+        const pickup = document.getElementById("pickup").value;
+        const drop = document.getElementById("drop").value;
+        const date = getSelectedDate();
+        const time = getSelectedTime();
 
-  // ✅ Combine date + time and check at least +3 hours
-  const [hh, mm, ampm] = time.split(/[: ]/); // ["05","30","PM"]
-  let pickupHour = parseInt(hh, 10);
-  const pickupMinute = parseInt(mm, 10);
-  if (ampm === "PM" && pickupHour !== 12) pickupHour += 12;
-  if (ampm === "AM" && pickupHour === 12) pickupHour = 0;
+        if (!mobile) {
+          alert("Please enter mobile number!");
+          btn.classList.remove("loading");
+          btn.innerText = originalText;
+          return;
+        }
+        if (!date) {
+          alert("Please select pickup date!");
+          btn.classList.remove("loading");
+          btn.innerText = originalText;
+          return;
+        }
 
-  const pickupDateTime = new Date(date);
-  pickupDateTime.setHours(pickupHour, pickupMinute, 0, 0);
+        const tripType = "One-way";
+        const templateParams = {
+          to_name: "MR CUBAN Admin",
+          user_name: name,
+          user_mobile: mobile,
+          pickup: pickup,
+          drop: drop,
+          tripType: tripType,
+          vehicle: selectedVehicle ? selectedVehicle.name : "N/A",
+          price: selectedVehicle ? selectedVehicle.price : "N/A",
+          date: date,
+          time: time,
+        };
 
-  const minAllowed = new Date();
-  minAllowed.setHours(minAllowed.getHours() + 3);
+        emailjs
+          .send("service_noq572r", "template_imymtxh", templateParams)
+          .then(
+            (response) => {
+              console.log("Email sent!", response);
+              const rideData = encodeURIComponent(
+                JSON.stringify({
+                  name,
+                  mobile,
+                  pickup,
+                  drop,
+                  tripType,
+                  vehicle: templateParams.vehicle,
+                  price: templateParams.price,
+                  date,
+                  time,
+                })
+              );
+              window.open(`ride-confirmed.html?data=${rideData}`, "_blank");
+              btn.classList.remove("loading");
+              btn.innerText = originalText;
+            },
+            (error) => {
+              console.log("Email failed...", error);
+              alert("Failed! Please try again.");
+              btn.classList.remove("loading");
+              btn.innerText = originalText;
+            }
+          );
+      }
 
-  if (pickupDateTime < minAllowed) {
-    alert("Pickup time must be at least 3 hours from now.");
-    btn.classList.remove("loading");
-    btn.innerText = originalText;
-    return;
-  }
+      function isValidIndianMobile(number) {
+        const regex = /^[6-9]\d{9}$/; // starts with 6-9 and has 10 digits total
+        return regex.test(number);
+      }
 
-  const tripType = "One-way";
+      // 🔸 Name & Mobile Popup Logic
+      function saveUserInfo() {
+        const name = document.getElementById("popupName").value.trim();
+        const mobile = document.getElementById("popupMobile").value.trim();
+        if (!name || !mobile) {
+          alert("Please enter both Name and Mobile Number!");
+          return;
+        }
 
-  const templateParams = {
-    to_name: "MR CUBAN Admin",
-    user_name: name,
-    user_mobile: mobile,
-    pickup: pickup,
-    drop: drop,
-    tripType: tripType,
-    vehicle: selectedVehicle.name,
-    price: selectedVehicle.price,
-    date: date,
-    time: time
-  };
+        if (!isValidIndianMobile(mobile)) {
+          alert(
+            "Please enter a valid Indian mobile number (10 digits starting with 6-9)"
+          );
+          return;
+        }
 
-  emailjs.send("service_noq572r", "template_imymtxh", templateParams)
-    .then(response => {
-      console.log("Email sent!", response);
+        // save locally
+        localStorage.setItem("userName", name);
+        localStorage.setItem("userMobile", mobile);
 
-      const rideData = encodeURIComponent(JSON.stringify({
-        name, mobile, pickup, drop, tripType,
-        vehicle: selectedVehicle.name, price: selectedVehicle.price,
-        date, time
-      }));
-      window.open(`ride-confirmed.html?data=${rideData}`, '_blank');
+        // send email instantly
+        emailjs.send("service_noq572r", "template_imymtxh", {
+          to_name: "MR CUBAN Admin",
+          user_name: name,
+          user_mobile: mobile,
+          pickup: "Not selected",
+          drop: "Not selected",
+          tripType: "Entered Only",
+          vehicle: "N/A",
+          price: "N/A",
+          time: "N/A",
+        });
 
-      btn.classList.remove("loading");
-      btn.innerText = originalText;
+        // auto-fill later forms
+        if (document.getElementById("userName"))
+          document.getElementById("userName").value = name;
+        if (document.getElementById("userMobile"))
+          document.getElementById("userMobile").value = mobile;
 
-    }, error => {
-      console.log("Email failed...", error);
-      alert("Failed! Please try again.");
-      btn.classList.remove("loading");
-      btn.innerText = originalText;
-    });
-}
-</script>
+        // close popup
+        document.getElementById("userPopup").style.display = "none";
+      }
 
-
-
-</body>
+      window.onload = function () {
+        const savedName = localStorage.getItem("userName");
+        const savedMobile = localStorage.getItem("userMobile");
+        if (!savedName || !savedMobile) {
+          document.getElementById("userPopup").style.display = "flex";
+        } else {
+          if (document.getElementById("userName"))
+            document.getElementById("userName").value = savedName;
+          if (document.getElementById("userMobile"))
+            document.getElementById("userMobile").value = savedMobile;
+        }
+      };
+    </script>
+  </body>
 </html>
